@@ -17,7 +17,6 @@
         }
 
         body {
-            /* REMOVED: background: #fcf8f0; */
             font-family: 'Playfair Display', serif;
             min-height: 100vh;
             display: flex;
@@ -25,48 +24,127 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            position: relative; /* Changed to relative for z-index stacking */
+            padding-bottom: 80px; /* Space for floating button */
+            position: relative;
             overflow-x: hidden;
         }
 
-        /* --- NEW: Background Image and Overlay --- */
+        /* Background Image and Overlay */
          body::before {
             content: '';
-            position: fixed; /* Covers the whole viewport */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* NEW: Angkor Wat Background Image */
-            background-image: url('data:image/jpeg;base64,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');
+            background-image: url('data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxISEhUSEhMVFRUVFRUVFhUYGBYYGBcXFxUYFhUVFRUYHSggGBolHRUVITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OGxAQGy0lICUtLy8vLS0tLS0tLS0yLy0tLS0tLi0tLS0tLS8rLSstLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIALYBFAMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAAFAAIDBQYBB//EAFMQAAEDAgMDBwcHBwgHCQAAAAECAxEABBIhMQVBUQYTImFxgZEyUqGxwdHwFCNCK5LS4RVzYnKCosEHFiRDVIOT0jRDVGSUo6S0wvH/xAAZAQADAQEBAAAAAAAAAAAAAAAAAQIDBAX/xAArEQACAgEDBAEDAwUAAAAAAAAAAQIRAxIhMQRBUVEUMmFxkcHwIlKBocH/2gAMAwEAAhEDEQA/AJ4pRXaQrmLOgU8JrgqRIpgJKakSinITU6G6BkPN0xy3o8N1wt0BRTC2zo62FTKRTUJqigZaWZrR7Oeisrbrq1tbiKaY6NYDXapmtphCZUQEjUkgAdpNVPKvly1ZtIcgOlaglKUqEkQSpQIByEAcJUKuydJqLp4AVjtm3KlKjEmeEin70rzvk3/KPc3YKEQw2TmhKeh0jTpqHnqVw7I8KxTqxiBJAjTACII3gjTdw0qG7LUaPYrluqq5RWY5P8rA2lSLha1AQUEytWZzBJzPfpFW45R2y5h0CPOlE9mICaloGMuGqhwVFe7dYTBx4pmMHS01ncNababSbdBKSRETuga6b6KZDJ8NcUYEnIcarNp7dQ10U9NfAHIdp9grOX+0HHj0zluSNPdvqlGxGvW4jepPiKFfvmU/TT3Z+qqfZfJe6uAlbTRwKJAcJARlIJOcxIIkCi3OQ96lWHm0keeHEYfSQr0U6Q6CHNtNJSCCVTuA07Z0qRW2WAJx90GewiMqz+1div25h1BAyhQ6SDO4KGU9WtAU6QqNpZbRadICVZ+acj2dfdVq1ZGvOkLw6gyDI6iPVWt2byxwgJeAV+mmAqOtOQJ8KTXoaiX3yLqrtBfzvtfOV9mlU7jpGiFOSKclNEsMTU2CRElGUnIDUnQVxnaFvj5vnmseaWNOUCTOcA1Vec8r755xRDhPNg5BKeiOEgqzVnrVIpwwnAoqy3pggyRGXv301urRbhp5PaHNsWbacSrlsga4DzhG7MNhRAnKTU9jyh2e4mRdsp1ycWltQgx5LkHdXkLD1xjgHAQJJwgDPrSOl2VIrZLpJUHWpJmIIz+z3xQvuNqP9J6DtPlm2lcWyUvtjJTnOYZOXkdEyBOpjPxovZXKhi4ODNtZ0SvCMR4JIJCj1a9VecK2ddAHptKSAIOR3wIhMig3NivgnD0t+RA1zORIjOlrvehyUa2s9evbtDQKnFpQBBJUQNTA166xG1eW7hn5M2AkaLWCSrXRIjD3knqFZ9PJ55UKJTiMZKKpHVOdTNclXPrQOMA5dhkVVogPa5aXeEDE1lniLZkjWD0gmOwCj2f5TViQq3TvAUlZieOEjT/ABVVtckE/ScX3BI9YNaaytrZhopbtUuKCT5aUKKyAfKUUnXqy4Ci0Df2MLtba79yoFxalGZAkwOAQgZI13ZmM5odxl05qSr7JJ47hWx2U0VJbeFsw0vygOYCSlSVZFIOYzEg99Xg2pdeen7P407SC2zz5NmhCApx1KeI5t0kTuJKQPAntq22OjZ6QFOJL6pJxKKkpi4');
             background-size: cover;
             background-position: center center;
-            background-attachment: fixed; /* Keeps image still on scroll */
-            filter: blur(2px); /* Blur effect for background */
-            transform: scale(1.1); /* Slightly scale to avoid blur edges */
-            z-index: -2; /* Places it behind everything */
+            background-attachment: fixed;
+            filter: blur(2px);
+            transform: scale(1.1);
+            z-index: -2;
         }
 
         body::after {
             content: '';
-            position: fixed; /* Covers the whole viewport */
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            /* NEW: Light sandstone overlay for readability */
-            background: rgba(252, 248, 240, 0.75); /* Was #fcf8f0 */
-            z-index: -1; /* Places it on top of image, behind content */
+            background: rgba(252, 248, 240, 0.75);
+            z-index: -1;
         }
-        /* --- End of New Background --- */
 
-
-        /* NEW: Language switcher container */
+        /* Language Switcher - Desktop */
         .lang-switcher {
             position: absolute;
             top: 20px;
             right: 20px;
             z-index: 10;
+            display: none; /* Hidden on mobile by default */
+        }
+
+        /* Floating Language Button - Mobile */
+        .lang-float-btn {
+            display: none; /* Hidden on desktop */
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: #8B0000;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5em;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .lang-float-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+        }
+
+        .lang-float-btn.active {
+            background: #FFD700;
+            color: #8B0000;
+        }
+
+        /* Language Menu Popup */
+        .lang-menu {
+            display: none;
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            z-index: 999;
+            animation: slideUp 0.3s ease;
+        }
+
+        .lang-menu.show {
+            display: block;
+        }
+
+        .lang-menu button {
+            display: block;
+            width: 100%;
+            padding: 15px 20px;
+            margin: 5px 0;
+            background: #fff;
+            border: 2px solid #FFD700;
+            color: #8B0000;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 700;
+            font-family: 'Battambang', cursive;
+            transition: all 0.3s;
+        }
+
+        .lang-menu button:hover,
+        .lang-menu button.active {
+            background: #8B0000;
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
 
         .lang-switcher button {
@@ -89,7 +167,6 @@
             color: #8B0000;
         }
 
-        /* NEW: Style for the active language button */
         .lang-switcher button.active {
             background: #8B0000;
             color: white;
@@ -97,17 +174,16 @@
         }
         
         .container {
-            /* NEW: Simple white background */
             background: #ffffff;
             border-radius: 20px;
             padding: 50px 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); /* Softer shadow */
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
             max-width: 700px;
             width: 100%;
             text-align: center;
-            border: 3px solid #FFD700; /* Gold border */
+            border: 3px solid #FFD700;
             position: relative;
-            z-index: 2; /* Ensures this is above background */
+            z-index: 2;
         }
 
         .container::before,
@@ -115,7 +191,7 @@
             content: '❊';
             position: absolute;
             font-size: 2em;
-            color: #E00025; /* Khmer Flag Red */
+            color: #E00025;
         }
 
         .container::before {
@@ -136,13 +212,12 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* NEW: Khmer title font */
         h1 span[lang="km"] {
             font-family: 'Moul', cursive;
             font-size: 1.2em;
             display: block;
             margin-bottom: 10px;
-            color: #002B7F; /* Khmer Flag Blue */
+            color: #002B7F;
         }
 
         .destination {
@@ -175,13 +250,12 @@
         }
 
         .time-unit {
-            /* NEW: Simplified solid color background */
-            background: #8B0000; /* Solid dark red */
+            background: #8B0000;
             padding: 25px 15px;
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
             transition: transform 0.3s;
-            border: 2px solid #FFD700; /* Gold border */
+            border: 2px solid #FFD700;
         }
 
         .time-unit:hover {
@@ -231,7 +305,6 @@
         .current-time {
             margin-top: 20px;
             padding: 15px;
-            /* NEW: Simplified gold background */
             background: #FFD700;
             border-radius: 10px;
             color: #8B0000;
@@ -244,13 +317,12 @@
         .gallery {
             margin-top: 40px;
             position: relative;
-            z-index: 2; /* Ensures this is above background */
+            z-index: 2;
             max-width: 1200px;
             width: 100%;
         }
 
         .gallery-title {
-            /* NEW: Simplified colors */
             color: #8B0000;
             font-size: 2em;
             margin-bottom: 30px;
@@ -270,7 +342,7 @@
 
         .gallery-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
             padding: 20px;
         }
@@ -295,7 +367,6 @@
             height: 250px;
             object-fit: cover;
             display: block;
-            /* Add a background color in case image is slow */
             background: #eee;
         }
 
@@ -306,19 +377,26 @@
             font-weight: 600;
             text-align: center;
             font-size: 1em;
-            min-height: 4.5em; /* Ensure consistent height for captions */
+            min-height: 4.5em;
             display: flex;
             align-items: center;
             justify-content: center;
         }
 
+        /* Mobile Styles */
         @media (max-width: 600px) {
+            body {
+                padding: 10px;
+                padding-bottom: 100px;
+            }
+
+            /* Show mobile floating button, hide desktop switcher */
+            .lang-float-btn {
+                display: block;
+            }
+
             .lang-switcher {
-                position: relative;
-                top: -10px;
-                right: auto;
-                text-align: center;
-                margin-bottom: 20px;
+                display: none;
             }
             
             .countdown {
@@ -338,22 +416,55 @@
                 font-size: 2.5em;
             }
 
+            /* Mobile Gallery - 2 columns */
             .gallery-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+                padding: 10px;
+            }
+
+            .gallery-item img {
+                height: 180px;
+            }
+
+            .gallery-caption {
+                padding: 10px;
+                font-size: 0.85em;
+                min-height: 3.5em;
             }
 
             .gallery-title {
                 font-size: 1.5em;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+        }
+
+        /* Desktop - show lang switcher */
+        @media (min-width: 601px) {
+            .lang-switcher {
+                display: block;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- NEW: Language Switcher Buttons -->
+    <!-- Desktop Language Switcher -->
     <div class="lang-switcher">
-        <button id="btn-en" class="active">English</button>
-        <button id="btn-km">ខ្មែរ</button>
+        <button id="btn-en-desktop" class="active">English</button>
+        <button id="btn-km-desktop">ខ្មែរ</button>
+    </div>
+
+    <!-- Mobile Floating Language Button -->
+    <button class="lang-float-btn" id="lang-toggle">🌐</button>
+
+    <!-- Mobile Language Menu -->
+    <div class="lang-menu" id="lang-menu">
+        <button id="btn-en-mobile" class="active">English</button>
+        <button id="btn-km-mobile">ខ្មែរ</button>
     </div>
 
     <div class="container">
@@ -387,6 +498,7 @@
         <div class="current-time" id="current-time"></div>
     </div>
 
+    
     <div class="gallery">
         <h2 class="gallery-title" data-en="✨ Discover Siem Reap ✨" data-km="✨ ស្វែងយល់ពីខេត្តសៀមរាប ✨">✨ Discover Siem Reap ✨</h2>
         
@@ -456,7 +568,7 @@
 
             // Update current time display
             const currentDateTime = new Date();
-            const activeLang = document.querySelector('.lang-switcher button.active').id === 'btn-km' ? 'km' : 'en';
+            const activeLang = document.querySelector('.lang-menu button.active, .lang-switcher button.active')?.id?.includes('km') ? 'km' : 'en';
 
             if (activeLang === 'km') {
                 // Khmer date format
@@ -497,11 +609,8 @@
                 hoursEl.textContent = '0';
                 minutesEl.textContent = '0';
                 secondsEl.textContent = '0';
-                // This message will also be translated by the new script
                 messageEl.dataset.en = '🎊 Your Siem Reap Trip has begun! Have an amazing trip! 🎊';
                 messageEl.dataset.km = '🎊 ដំណើរកំសាន្តនៅសៀមរាបរបស់អ្នកបានចាប់ផ្តើមហើយ! 🎊';
-                // We need to manually update the text if the countdown just finished
-                // Check which language is active
                 messageEl.textContent = messageEl.dataset[activeLang];
                 return;
             }
@@ -516,7 +625,7 @@
             minutesEl.textContent = minutes.toString().padStart(2, '0');
             secondsEl.textContent = seconds.toString().padStart(2, '0');
 
-            // Update messages for translation
+            // Update messages
             if (days > 7) {
                 messageEl.dataset.en = `Can't wait to explore the temples! 🎉`;
                 messageEl.dataset.km = `រង់ចាំទៅមើលប្រាសាទមិនបានទេ! 🎉`;
@@ -530,93 +639,109 @@
                 messageEl.dataset.en = `Just moments away! 🌟`;
                 messageEl.dataset.km = `នៅតែប៉ុន្មាននាទីទៀត! 🌟`;
             }
-            // Update the message text based on the currently active language
             messageEl.textContent = messageEl.dataset[activeLang];
         }
-        // --- NEW: Language Switcher Script ---
 
-        const btnEn = document.getElementById('btn-en');
-        const btnKm = document.getElementById('btn-km');
+        // Language Switcher
+        const langToggle = document.getElementById('lang-toggle');
+        const langMenu = document.getElementById('lang-menu');
+        const btnEnMobile = document.getElementById('btn-en-mobile');
+        const btnKmMobile = document.getElementById('btn-km-mobile');
+        const btnEnDesktop = document.getElementById('btn-en-desktop');
+        const btnKmDesktop = document.getElementById('btn-km-desktop');
         
-        // Get all elements that have 'data-en' or 'data-km' attributes
         const translatableElements = document.querySelectorAll('[data-en]');
 
-        // Function to set the language
+        // Toggle mobile menu
+        langToggle.addEventListener('click', () => {
+            langMenu.classList.toggle('show');
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!langToggle.contains(e.target) && !langMenu.contains(e.target)) {
+                langMenu.classList.remove('show');
+            }
+        });
+
         function setLanguage(lang) {
             translatableElements.forEach(el => {
                 const text = el.getAttribute(`data-${lang}`);
                 if (text) {
-                    // Special handling for Khmer fonts
                     if (lang === 'km') {
-                        // Use 'Moul' for main headings
-                        if (el.tagName === 'H1' || el.tagName ==='H2') {
+                        if (el.tagName === 'H1' || el.tagName === 'H2') {
                             el.style.fontFamily = "'Siemreap', cursive";
-                        } 
-                        // Use 'Battambang' for other elements
-                        else {
+                        } else {
                             el.style.fontFamily = "'Siemreap', cursive";
                         }
                     } else {
-                        // Reset to default English font
                         if (el.tagName === 'H1' || el.tagName === 'H2') {
                             el.style.fontFamily = "'Playfair Display', Siemreap";
                         } else {
-                            // Clear style to use parent's font
-                            el.style.fontFamily = ''; 
+                            el.style.fontFamily = '';
                         }
                     }
 
-                    // For elements with children spans (like destination), update the span
                     if (el.children.length > 0 && el.children[0].tagName === 'SPAN') {
                          el.children[0].textContent = text;
-                    } 
-                    // For countdown labels, update the main text node
-                    else if (el.classList.contains('time-label')) {
-                        // This logic finds the first text node and updates it
+                    } else if (el.classList.contains('time-label')) {
                         const textNode = Array.from(el.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
                         if(textNode) {
-                            textNode.textContent = text + ' '; // Add space
+                            textNode.textContent = text + ' ';
                         } else {
                             el.prepend(text + ' ');
                         }
-                    }
-                    // For all other elements
-                    else {
+                    } else {
                         el.textContent = text;
                     }
                 }
             });
             
-            // Update button active state
+            // Update button active states
             if (lang === 'km') {
-                btnKm.classList.add('active');
-                btnEn.classList.remove('active');
+                btnKmMobile.classList.add('active');
+                btnEnMobile.classList.remove('active');
+                btnKmDesktop.classList.add('active');
+                btnEnDesktop.classList.remove('active');
+                langToggle.textContent = 'ខ្មែរ';
             } else {
-                btnEn.classList.add('active');
-                btnKm.classList.remove('active');
+                btnEnMobile.classList.add('active');
+                btnKmMobile.classList.remove('active');
+                btnEnDesktop.classList.add('active');
+                btnKmDesktop.classList.remove('active');
+                langToggle.textContent = 'EN';
             }
+            
+            // Close mobile menu
+            langMenu.classList.remove('show');
         }
 
-        // Add click event listeners to buttons
-        btnEn.addEventListener('click', () => {
+        // Mobile buttons
+        btnEnMobile.addEventListener('click', () => {
             setLanguage('en');
-            updateCountdown(); // Refresh message text on lang change
+            updateCountdown();
         });
-        btnKm.addEventListener('click', () => {
+        
+        btnKmMobile.addEventListener('click', () => {
             setLanguage('km');
-            updateCountdown(); // Refresh message text on lang change
+            updateCountdown();
+        });
+
+        // Desktop buttons
+        btnEnDesktop.addEventListener('click', () => {
+            setLanguage('en');
+            updateCountdown();
         });
         
-        // --- End of New Language Script ---
+        btnKmDesktop.addEventListener('click', () => {
+            setLanguage('km');
+            updateCountdown();
+        });
 
-        // Update immediately on load
-        setLanguage('en'); // Set default language to English
+        // Initialize
+        setLanguage('en');
         updateCountdown();
-        
-        // Update every second
         setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
-
-
