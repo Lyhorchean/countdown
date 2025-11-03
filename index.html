@@ -16,7 +16,8 @@
         }
 
         body {
-            /* Updated Font */
+            /* NEW: Simple, light sandstone color background */
+            background: #fcf8f0; /* Was #FDF5E6, made it a bit lighter */
             font-family: 'Playfair Display', serif;
             min-height: 100vh;
             display: flex;
@@ -26,60 +27,65 @@
             padding: 20px;
             position: relative;
             overflow-x: hidden;
-            background: #1a1a1a;
         }
 
-        .background-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            z-index: 0;
-        }
-
-        .background-container::before {
-            content: '';
+        /* NEW: Language switcher container */
+        .lang-switcher {
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            /* NEW: Khmer Flag inspired gradient */
-            background: linear-gradient(135deg, rgba(0, 43, 127, 0.7) 0%, rgba(224, 0, 37, 0.6) 50%, rgba(255, 215, 0, 0.5) 100%);
-            z-index: 1;
+            top: 20px;
+            right: 20px;
+            z-index: 10;
         }
 
-        .background-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0.4;
+        .lang-switcher button {
+            font-family: 'Battambang', cursive;
+            background: #fff;
+            border: 2px solid #FFD700;
+            color: #8B0000;
+            padding: 8px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 700;
+            margin-left: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
         }
+
+        .lang-switcher button:hover {
+            background: #FFD700;
+            color: #8B0000;
+        }
+
+        /* NEW: Style for the active language button */
+        .lang-switcher button.active {
+            background: #8B0000;
+            color: white;
+            border-color: #8B0000;
+        }
+        
+        /* REMOVED: .background-container and its pseudo-elements */
 
         .container {
-            /* NEW: Softer cream background */
-            background: rgba(253, 245, 230, 0.95); /* #FDF5E6 */
+            /* NEW: Simple white background */
+            background: #ffffff;
             border-radius: 20px;
             padding: 50px 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15); /* Softer shadow */
             max-width: 700px;
             width: 100%;
             text-align: center;
             border: 3px solid #FFD700; /* Gold border */
             position: relative;
             z-index: 2;
-            backdrop-filter: blur(10px);
         }
 
         .container::before,
         .container::after {
-            /* NEW: Updated Khmer-style motif */
             content: '❊';
             position: absolute;
             font-size: 2em;
-            /* NEW: Khmer Flag Red */
-            color: #E00025;
+            color: #E00025; /* Khmer Flag Red */
         }
 
         .container::before {
@@ -100,25 +106,22 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
-        /* NEW: Style for Khmer title */
+        /* NEW: Khmer title font */
         h1 span[lang="km"] {
             font-family: 'Moul', cursive;
             font-size: 1.2em;
             display: block;
             margin-bottom: 10px;
-            /* NEW: Khmer Flag Blue */
-            color: #002B7F;
+            color: #002B7F; /* Khmer Flag Blue */
         }
 
         .destination {
-            /* NEW: Khmer Flag Red */
             color: #E00025;
             font-size: 1.5em;
             margin-bottom: 15px;
             font-weight: 600;
         }
         
-        /* NEW: Style for Khmer subtitle */
         .destination span[lang="km"] {
             font-family: 'Battambang', cursive;
             display: block;
@@ -142,13 +145,13 @@
         }
 
         .time-unit {
-            /* NEW: Blue-to-Red gradient */
-            background: linear-gradient(135deg, #002B7F 0%, #E00025 100%);
+            /* NEW: Simplified solid color background */
+            background: #8B0000; /* Solid dark red */
             padding: 25px 15px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 43, 127, 0.4);
+            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.3);
             transition: transform 0.3s;
-            border: 2px solid #FFD700;
+            border: 2px solid #FFD700; /* Gold border */
         }
 
         .time-unit:hover {
@@ -173,7 +176,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
-        /* NEW: Style for Khmer countdown labels */
         .khmer-label {
             font-family: 'Battambang', cursive;
             display: block;
@@ -199,12 +201,12 @@
         .current-time {
             margin-top: 20px;
             padding: 15px;
-            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+            /* NEW: Simplified gold background */
+            background: #FFD700;
             border-radius: 10px;
             color: #8B0000;
             font-size: 0.95em;
             font-weight: 600;
-            /* NEW: Khmer Flag Red */
             border: 2px solid #E00025;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
@@ -218,21 +220,21 @@
         }
 
         .gallery-title {
-            color: #FFD700;
+            /* NEW: Simplified colors */
+            color: #8B0000;
             font-size: 2em;
             margin-bottom: 30px;
             font-weight: 700;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
             text-align: center;
         }
         
-        /* NEW: Style for Khmer gallery title */
         .gallery-title span[lang="km"] {
             font-family: 'Moul', cursive;
             display: block;
             font-size: 0.9em;
-            color: white;
-            text-shadow: 1px 1px 2px #000;
+            color: #002B7F;
+            text-shadow: none;
             margin-top: 5px;
         }
 
@@ -247,16 +249,15 @@
             position: relative;
             border-radius: 15px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s;
             border: 3px solid #FFD700;
-            /* NEW: Softer cream background */
-            background: #FDF5E6;
+            background: #ffffff;
         }
 
         .gallery-item:hover {
             transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.6);
+            box-shadow: 0 15px 40px rgba(255, 215, 0, 0.4);
         }
 
         .gallery-item img {
@@ -268,15 +269,26 @@
 
         .gallery-caption {
             padding: 15px;
-            /* NEW: Softer cream background */
-            background: #FDF5E6;
+            background: #ffffff;
             color: #8B0000;
             font-weight: 600;
             text-align: center;
             font-size: 1em;
+            min-height: 4.5em; /* Ensure consistent height for captions */
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         @media (max-width: 600px) {
+            .lang-switcher {
+                position: relative;
+                top: -10px;
+                right: auto;
+                text-align: center;
+                margin-bottom: 20px;
+            }
+            
             .countdown {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
@@ -305,66 +317,75 @@
     </style>
 </head>
 <body>
-    <div class="background-container">
-        
-        <img src="https://images.unsplash.com/photo-1526481280643-3ff1a0038F4d?w=1920&q=80" alt="Angkor Wat Sunrise Background" id="bg-image">
+
+    <div class="lang-switcher">
+        <button id="btn-en" class="active">English</button>
+        <button id="btn-km">ខ្មែរ</button>
     </div>
 
     <div class="container">
         <div class="icon">🛕</div>
-        <h1><span lang="km">រាប់ថយក្រោយទៅ</span>Countdown to</h1>
-        <div class="destination">Siem Reap Trip<span lang="km">ដំណើរទស្សនកិច្ចសៀមរាប</span></div>
+        <h1 data-en="Countdown to" data-km="រាប់ថយក្រោយទៅ">Countdown to</h1>
+        <div class="destination">
+            <span data-en="Siem Reap Trip" data-km="ដំណើរទស្សនកិច្ចសៀមរាប">Siem Reap Trip</span>
+        </div>
         <div class="trip-date">November 6, 2025 at 9:00 PM</div>
 
         <div class="countdown">
             <div class="time-unit">
                 <div class="time-value" id="days">0</div>
-                <div class="time-label">Days <span class="khmer-label" lang="km">ថ្ងៃ</span></div>
+                <div class="time-label" data-en="Days" data-km="ថ្ងៃ">Days</div>
             </div>
             <div class="time-unit">
                 <div class="time-value" id="hours">0</div>
-                <div class="time-label">Hours <span class="khmer-label" lang="km">ម៉ោង</span></div>
+                <div class="time-label" data-en="Hours" data-km="ម៉ោង">Hours</div>
             </div>
             <div class="time-unit">
                 <div class="time-value" id="minutes">0</div>
-                <div class="time-label">Minutes <span class="khmer-label" lang="km">នាទី</span></div>
+                <div class="time-label" data-en="Minutes" data-km="នាទី">Minutes</div>
             </div>
             <div class="time-unit">
                 <div class="time-value" id="seconds">0</div>
-                <div class="time-label">Seconds <span class="khmer-label" lang="km">វិនាទី</span></div>
+                <div class="time-label" data-en="Seconds" data-km="វិនាទី">Seconds</div>
             </div>
         </div>
 
-        <div class="message" id="message">Get ready for your adventure! 🎉</div>
+        <div class="message" id="message" data-en="Get ready for your adventure! 🎉" data-km="ត្រៀមខ្លួនសម្រាប់ការផ្សងព្រេងរបស់អ្នក! 🎉">Get ready for your adventure! 🎉</div>
         <div class="current-time" id="current-time"></div>
     </div>
 
     <div class="gallery">
-        <h2 class="gallery-title">✨ Discover Siem Reap <span lang="km">ស្វែងយល់ពីសៀមរាប</span> ✨</h2>
+        <h2 class="gallery-title" data-en="✨ Discover Siem Reap ✨" data-km="✨ ស្វែងយល់ពីសៀមរាប ✨">✨ Discover Siem Reap ✨</h2>
+        
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?w=800&q=80" alt="Bayon Temple">
-                <div class="gallery-caption">😊 Bayon Temple - Smiling Faces</div>
+                <img src="https://images.unsplash.com/photo-1526481280643-3ff1a0038F4d?w=800&q=80" alt="Angkor Wat at Sunrise">
+                <div class="gallery-caption" data-en="🏯 Angkor Wat - Sunrise Wonder" data-km="🏯 អង្គរវត្ត - អច្ឆរិយៈពេលព្រះអាទិត្យរះ">🏯 Angkor Wat - Sunrise Wonder</div>
             </div>
+            
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1549921297-5807183e843b?w=800&q=80" alt="Pub Street at Night">
+                <div class="gallery-caption" data-en="🍻 Pub Street - Nightlife Hub" data-km="🍻 ផាប់ស្ទ្រីត - មជ្ឈមណ្ឌលកម្សាន្តពេលរាត្រី">🍻 Pub Street - Nightlife Hub</div>
+            </div>
+            
             <div class="gallery-item">
                 <img src="https://images.unsplash.com/photo-1563640835496-1c5c2e9ec244?w=800&q=80" alt="Ta Prohm Temple">
-                <div class="gallery-caption">🌳 Ta Prohm - Jungle Temple</div>
+                <div class="gallery-caption" data-en="🌳 Ta Prohm - Jungle Temple" data-km="🌳 ប្រាសាទតាព្រហ្ម - ប្រាសាទក្នុងព្រៃ">🌳 Ta Prohm - Jungle Temple</div>
             </div>
+            
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1543085573-e3c348880a6c?w=800&q=80" alt="Banteay Srei Carvings">
-                <div class="gallery-caption">🌸 Banteay Srei - Intricate Carvings</div>
+                <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?w=800&q=80" alt="Bayon Temple">
+                <div class="gallery-caption" data-en="😊 Bayon Temple - Smiling Faces" data-km="😊 ប្រាសាទបាយ័ន - មុខញញឹម">😊 Bayon Temple - Smiling Faces</div>
             </div>
+            
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1579413284033-a845b4c194b3?w=800&q=80" alt="Apsara Dancers">
-                <div class="gallery-caption">💃 Traditional Apsara Dancers</div>
+                <img src="https://images.unsplash.com/photo-1582202611756-0048aa73f516?w=800&q=80" alt="Kampong Phluk Floating Village">
+                <div class="gallery-caption" data-en="🛶 Kampong Phluk - Floating Village" data-km="🛶 កំពង់ភ្លុក - ភូមិបណ្តែតទឹក">🛶 Kampong Phluk - Floating Village</div>
             </div>
+            
             <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1574888796839-952b865ab374?w=800&q=80" alt="Angkor Wat Corridor">
-                <div class="gallery-caption">🏛️ Angkor Wat Corridor</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.unsplash.com/photo-1549921297-5807183e843b?w=800&q=80" alt="Siem Reap Pub Street">
-                <div class="gallery-caption">🍻 Siem Reap - Pub Street Nightlife</div>
+                <img src="https://images.unsplash.com/photo-1533201822299-a8647b0a79a1?w=800&q=80" alt="Phare, the Cambodian Circus">
+                <div class="gallery-caption" data-en="🎪 Phare - The Cambodian Circus" data-km="🎪 ហ្វារ - សៀកកម្ពុជា">🎪 Phare - The Cambodian Circus</div>
             </div>
         </div>
     </div>
@@ -377,21 +398,7 @@
         const messageEl = document.getElementById('message');
         const currentTimeEl = document.getElementById('current-time');
 
-        // NEW: Updated array of background images
-        const backgrounds = [
-            'https://images.unsplash.com/photo-1526481280643-3ff1a0038F4d?w=1920&q=80', // Angkor Wat Sunrise
-            'https://images.unsplash.com/photo-1528181304800-259b08848526?w=1920&q=80', // Bayon Faces
-            'https://images.unsplash.com/photo-1563640835496-1c5c2e9ec244?w=1920&q=80', // Ta Prohm Trees
-            'https://images.unsplash.com/photo-1574888796839-952b865ab374?w=1920&q=80'  // Angkor Wat Corridor
-        ];
-
-        let currentBgIndex = 0;
-
-        // Change background every 10 seconds
-        setInterval(() => {
-            currentBgIndex = (currentBgIndex + 1) % backgrounds.length;
-            document.getElementById('bg-image').src = backgrounds[currentBgIndex];
-        }, 10000);
+        // REMOVED: Background image rotator script
 
         // Set trip date to November 6, 2025 at 9:00 PM
         const tripDate = new Date('2025-11-06T21:00:00').getTime();
@@ -402,7 +409,6 @@
 
             // Update current time display
             const currentDateTime = new Date();
-            // Using en-GB for a more international date format (DD/MM/YYYY)
             currentTimeEl.textContent = `Current Local Time: ${currentDateTime.toLocaleString('en-GB', {
                 weekday: 'short', 
                 year: 'numeric', 
@@ -418,7 +424,9 @@
                 hoursEl.textContent = '0';
                 minutesEl.textContent = '0';
                 secondsEl.textContent = '0';
-                messageEl.textContent = '🎊 Your Siem Reap adventure has begun! Have an amazing trip! 🎊';
+                // This message will also be translated by the new script
+                messageEl.dataset.en = '🎊 Your Siem Reap adventure has begun! Have an amazing trip! 🎊';
+                messageEl.dataset.km = '🎊 ការផ្សងព្រេងនៅសៀមរាបរបស់អ្នកបានចាប់ផ្តើមហើយ! 🎊';
                 return;
             }
 
@@ -432,19 +440,75 @@
             minutesEl.textContent = minutes.toString().padStart(2, '0');
             secondsEl.textContent = seconds.toString().padStart(2, '0');
 
+            // Update messages for translation
             if (days > 7) {
-                messageEl.textContent = `Can't wait to explore the temples! 🎉`;
+                messageEl.dataset.en = `Can't wait to explore the temples! 🎉`;
+                messageEl.dataset.km = `រង់ចាំទៅមើលប្រាសាទមិនបានទេ! 🎉`;
             } else if (days > 0) {
-                messageEl.textContent = `Almost time! Pack your bags! 🎒`;
+                messageEl.dataset.en = `Almost time! Pack your bags! 🎒`;
+                messageEl.dataset.km = `ជិតដល់ពេលហើយ! ខ្ចប់​ឥវ៉ាន់​របស់​អ្នក! 🎒`;
             } else if (hours > 0) {
-                messageEl.textContent = `The adventure is today! ✨`;
+                messageEl.dataset.en = `The adventure is today! ✨`;
+                messageEl.dataset.km = `ការផ្សងព្រេងគឺថ្ងៃនេះ! ✨`;
             } else {
-                messageEl.textContent = `Just moments away! 🌟`;
+                messageEl.dataset.en = `Just moments away! 🌟`;
+                messageEl.dataset.km = `នៅតែប៉ុន្មាននាទីទៀត! 🌟`;
             }
         }
 
-        // Update immediately
+        // --- NEW: Language Switcher Script ---
+
+        const btnEn = document.getElementById('btn-en');
+        const btnKm = document.getElementById('btn-km');
+        
+        // Get all elements that have 'data-en' or 'data-km' attributes
+        const translatableElements = document.querySelectorAll('[data-en], [data-km]');
+
+        // Function to set the language
+        function setLanguage(lang) {
+            translatableElements.forEach(el => {
+                const text = el.getAttribute(`data-${lang}`);
+                if (text) {
+                    // Special handling for Khmer fonts
+                    if (lang === 'km') {
+                        // Use 'Moul' for main headings
+                        if (el.tagName === 'H1' || el.tagName === 'H2') {
+                            el.style.fontFamily = "'Moul', cursive";
+                        } else {
+                            el.style.fontFamily = "'Battambang', cursive";
+                        }
+                    } else {
+                        // Reset to default English font
+                        if (el.tagName === 'H1' || el.tagName === 'H2') {
+                            el.style.fontFamily = "'Playfair Display', serif";
+                        } else {
+                            // Clear style to use parent's font
+                            el.style.fontFamily = ''; 
+                        }
+                    }
+                    el.textContent = text;
+                }
+            });
+            
+            // Update button active state
+            if (lang === 'km') {
+                btnKm.classList.add('active');
+                btnEn.classList.remove('active');
+            } else {
+                btnEn.classList.add('active');
+                btnKm.classList.remove('active');
+            }
+        }
+
+        // Add click event listeners to buttons
+        btnEn.addEventListener('click', () => setLanguage('en'));
+        btnKm.addEventListener('click', () => setLanguage('km'));
+        
+        // --- End of New Language Script ---
+
+        // Update immediately on load
         updateCountdown();
+        setLanguage('en'); // Set default language to English
         
         // Update every second
         setInterval(updateCountdown, 1000);
