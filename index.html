@@ -1,299 +1,357 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Siem Reap Trip Countdown</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Khmer-style Countdown (Angkor Wat)</title>
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
+<!-- Noto Sans Khmer for Khmer-styled lettering (English text) -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Khmer:wght@300;400;700&display=swap" rel="stylesheet">
 
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('https://images.unsplash.com/photo-1570709368767-2e50c1d2b5c6?w=1920') center/cover;
-            opacity: 0.15;
-            z-index: 0;
-        }
+<style>
+  :root{
+    --bg-img: url('https://images.unsplash.com/photo-1517821099607-4b5b9c0b9c3d?auto=format&fit=crop&w=1600&q=80'); /* Replace with your chosen Angkor Wat image URL */
+    --gold1: #cda14a;
+    --gold2: #f4d27a;
+    --overlay: rgba(15,10,8,0.45);
+    --accent: rgba(255, 230, 170, 0.95);
+  }
 
-        .container {
-            background: rgba(255, 255, 255, 0.98);
-            border-radius: 30px;
-            padding: 50px 40px;
-            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
-            max-width: 700px;
-            width: 100%;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 215, 0, 0.3);
-        }
+  html,body{
+    height:100%;
+    margin:0;
+    font-family: "Noto Sans Khmer", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    color:#fff;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    background: #000;
+  }
 
-        .angkor-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 20px;
-            margin-bottom: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
+  .bg{
+    position:fixed;
+    inset:0;
+    background-image: linear-gradient(180deg, rgba(0,0,0,0.15), rgba(0,0,0,0.45)), var(--bg-img);
+    background-size:cover;
+    background-position:center center;
+    filter:contrast(1.03) saturate(1.05);
+    z-index:0;
+  }
 
-        h1 {
-            color: #d4af37;
-            font-size: 2.8em;
-            margin-bottom: 10px;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
-        }
+  .overlay{
+    position:fixed;
+    inset:0;
+    background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.55));
+    z-index:1;
+  }
 
-        .destination {
-            color: #c17817;
-            font-size: 1.6em;
-            margin-bottom: 15px;
-            font-weight: 600;
-        }
+  .container{
+    position:relative;
+    z-index:2;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:2rem;
+    box-sizing:border-box;
+  }
 
-        .trip-date {
-            color: #555;
-            font-size: 1.1em;
-            margin-bottom: 30px;
-            font-weight: 500;
-        }
+  .card{
+    max-width:920px;
+    width:100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+    border-radius:18px;
+    padding:40px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.04);
+    backdrop-filter: blur(6px) saturate(1.1);
+    text-align:center;
+    color:var(--accent);
+  }
 
-        .time-to-go-banner {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            margin-bottom: 20px;
-            font-size: 1.8em;
-            font-weight: 700;
-            animation: pulse 1.5s infinite;
-            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
-        }
+  header h1{
+    margin:0 0 6px 0;
+    font-size:2.15rem;
+    letter-spacing:1px;
+    color:var(--gold2);
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+  header p{
+    margin:0 0 20px 0;
+    opacity:0.95;
+    font-size:1rem;
+  }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
+  .countdown{
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    margin:18px 0 8px;
+    flex-wrap:wrap;
+  }
 
-        .countdown {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin: 30px 0;
-        }
+  .time-block{
+    min-width:110px;
+    padding:18px 14px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(0,0,0,0.12));
+    border-radius:12px;
+    border: 1px solid rgba(255,200,90,0.06);
+    box-shadow: 0 8px 22px rgba(0,0,0,0.45);
+  }
 
-        .time-unit {
-            background: linear-gradient(135deg, #d4af37 0%, #c17817 100%);
-            padding: 25px 15px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
+  .time-block .num{
+    font-size:2.05rem;
+    font-weight:700;
+    color:var(--gold2);
+    margin-bottom:6px;
+  }
+  .time-block .label{
+    font-size:.85rem;
+    color:rgba(255,255,255,0.8);
+  }
 
-        .time-unit:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
-        }
+  .message{
+    margin-top:14px;
+    font-size:1rem;
+    opacity:0.95;
+  }
 
-        .time-value {
-            font-size: 3em;
-            font-weight: 700;
-            color: white;
-            line-height: 1;
-            margin-bottom: 10px;
-        }
+  .live-badge{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background: linear-gradient(90deg, rgba(255,140,10,0.1), rgba(200,120,40,0.06));
+    color: #fff;
+    border: 1px solid rgba(255,200,90,0.18);
+    padding:8px 12px;
+    border-radius:999px;
+    font-weight:700;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+    transform-origin:center;
+    transition: transform .25s ease, opacity .25s ease;
+  }
 
-        .time-label {
-            font-size: 0.9em;
-            color: rgba(255, 255, 255, 0.9);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 500;
-        }
+  .closed-overlay{
+    position:fixed;
+    inset:0;
+    z-index:9999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    background:linear-gradient(180deg, rgba(5,5,8,0.92), rgba(5,5,8,0.98));
+    color:var(--gold2);
+    padding:20px;
+    text-align:center;
+  }
 
-        .message {
-            margin-top: 30px;
-            font-size: 1.2em;
-            color: #555;
-            font-style: italic;
-        }
+  .closed-overlay h2{ margin:0 0 10px; font-size:2.25rem; }
+  .closed-overlay p{ margin:0 0 20px; opacity:0.9; }
 
-        .icon {
-            font-size: 3em;
-            margin-bottom: 20px;
-        }
+  /* Responsive */
+  @media (max-width:640px){
+    .card{ padding:20px; border-radius:12px; }
+    .time-block{ min-width:82px; padding:12px 8px; }
+    .time-block .num{ font-size:1.45rem; }
+    header h1{ font-size:1.6rem; }
+  }
 
-        .current-time {
-            margin-top: 20px;
-            padding: 15px;
-            background: #f8f9ff;
-            border-radius: 10px;
-            color: #667eea;
-            font-size: 0.95em;
-        }
+  /* small flourish: subtle Khmer motif line */
+  .motif{
+    height:6px;
+    width:180px;
+    margin:18px auto;
+    background: linear-gradient(90deg, rgba(255,230,160,0.25), rgba(255,200,90,0.18));
+    border-radius:3px;
+    box-shadow: 0 6px 14px rgba(200,140,60,0.06) inset;
+  }
 
-        @media (max-width: 600px) {
-            .countdown {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 15px;
-            }
-            
-            h1 {
-                font-size: 2em;
-            }
-            
-            .destination {
-                font-size: 1.2em;
-            }
-            
-            .time-value {
-                font-size: 2.5em;
-            }
-
-            .time-to-go-banner {
-                font-size: 1.4em;
-                padding: 15px;
-            }
-        }
-    </style>
+  .footer-note { margin-top:18px; font-size:.85rem; opacity:0.85; }
+</style>
 </head>
 <body>
-    <div class="container">
-        <img src="https://images.unsplash.com/photo-1570709368767-2e50c1d2b5c6?w=800" alt="Angkor Wat" class="angkor-image">
-        <div class="icon">✈️</div>
-        <h1>Countdown to</h1>
-        <div class="destination">Siem Reap Trip</div>
-        <div class="trip-date">November 6, 2025 at 9:00 PM</div>
+  <div class="bg" aria-hidden="true"></div>
+  <div class="overlay" aria-hidden="true"></div>
 
-        <div id="time-to-go-banner" class="time-to-go-banner" style="display: none;">
-            🚀 IT'S TIME TO GO! 🚀
+  <div class="container">
+    <div class="card" role="main" aria-live="polite">
+      <header>
+        <h1>Angkor Wat Countdown</h1>
+        <p class="subtitle">An elegant Khmer-inspired countdown — English text, Khmer style.</p>
+      </header>
+
+      <div class="motif" aria-hidden="true"></div>
+
+      <div id="liveBadge" class="live-badge" style="display:none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="rgba(240,120,30,0.95)"/></svg>
+        <span id="liveText">LIVE — 1 hour to go</span>
+      </div>
+
+      <div class="countdown" id="countdown">
+        <div class="time-block">
+          <div class="num" id="days">--</div>
+          <div class="label">DAYS</div>
         </div>
-
-        <div class="countdown">
-            <div class="time-unit">
-                <div class="time-value" id="days">0</div>
-                <div class="time-label">Days</div>
-            </div>
-            <div class="time-unit">
-                <div class="time-value" id="hours">0</div>
-                <div class="time-label">Hours</div>
-            </div>
-            <div class="time-unit">
-                <div class="time-value" id="minutes">0</div>
-                <div class="time-label">Minutes</div>
-            </div>
-            <div class="time-unit">
-                <div class="time-value" id="seconds">0</div>
-                <div class="time-label">Seconds</div>
-            </div>
+        <div class="time-block">
+          <div class="num" id="hours">--</div>
+          <div class="label">HOURS</div>
         </div>
+        <div class="time-block">
+          <div class="num" id="minutes">--</div>
+          <div class="label">MINUTES</div>
+        </div>
+        <div class="time-block">
+          <div class="num" id="seconds">--</div>
+          <div class="label">SECONDS</div>
+        </div>
+      </div>
 
-        <div class="message" id="message">Get ready for your adventure! 🎉</div>
-        <div class="current-time" id="current-time"></div>
+      <div class="message" id="message">
+        Event time: <strong id="eventTimeRead">—</strong>
+      </div>
+
+      <div class="footer-note">
+        Tip: replace the background with any high-res Angkor Wat image from Unsplash or Pexels for best visual result. 
+      </div>
     </div>
+  </div>
 
-    <script>
-        const daysEl = document.getElementById('days');
-        const hoursEl = document.getElementById('hours');
-        const minutesEl = document.getElementById('minutes');
-        const secondsEl = document.getElementById('seconds');
-        const messageEl = document.getElementById('message');
-        const currentTimeEl = document.getElementById('current-time');
-        const timeToGoBanner = document.getElementById('time-to-go-banner');
+  <!-- Closed overlay (hidden until triggered) -->
+  <div id="closedOverlay" class="closed-overlay" style="display:none;">
+    <h2>Closed</h2>
+    <p>This event is now closed. Thank you.</p>
+    <button id="reopenBtn" style="padding:10px 18px;border-radius:8px;border:none;background:var(--gold1);color:#111;font-weight:700;cursor:pointer;">Return</button>
+  </div>
 
-        // Set trip date to November 6, 2025 at 9:00 PM
-        const tripDate = new Date('2025-11-06T21:00:00').getTime();
+<script>
+  // ======= CONFIG =======
+  // Set your event time (ISO 8601). Example: "2025-12-31T18:00:00+07:00"
+  const eventTimeISO = "2025-12-31T18:00:00+07:00";
 
-        function updateCountdown() {
-            const now = new Date().getTime();
-            const distance = tripDate - now;
+  // Option: set to true to try to redirect to about:blank after close (some browsers will block)
+  const redirectAfterClose = false;
+  const redirectURL = "about:blank";
 
-            // Update current time display
-            const currentDateTime = new Date();
-            currentTimeEl.textContent = `Current Time: ${currentDateTime.toLocaleString('en-US', { 
-                weekday: 'short', 
-                year: 'numeric', 
-                month: 'short', 
-                day: 'numeric', 
-                hour: '2-digit', 
-                minute: '2-digit',
-                second: '2-digit'
-            })}`;
+  // ======= END CONFIG =======
 
-            // Check if countdown has ended
-            if (distance < 0) {
-                daysEl.textContent = '0';
-                hoursEl.textContent = '0';
-                minutesEl.textContent = '0';
-                secondsEl.textContent = '0';
-                messageEl.textContent = '🎊 Your Siem Reap adventure has begun! Have an amazing trip! 🎊';
-                timeToGoBanner.style.display = 'none';
-                
-                // Close the page after 5 seconds
-                setTimeout(() => {
-                    window.close();
-                }, 5000);
-                return;
-            }
+  const eventTime = new Date(eventTimeISO);
+  const eventTimeReadEl = document.getElementById('eventTimeRead');
+  eventTimeReadEl.textContent = eventTime.toLocaleString();
 
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  const daysEl = document.getElementById('days');
+  const hoursEl = document.getElementById('hours');
+  const minutesEl = document.getElementById('minutes');
+  const secondsEl = document.getElementById('seconds');
+  const liveBadge = document.getElementById('liveBadge');
+  const liveText = document.getElementById('liveText');
+  const messageEl = document.getElementById('message');
+  const closedOverlay = document.getElementById('closedOverlay');
+  const reopenBtn = document.getElementById('reopenBtn');
 
-            daysEl.textContent = days;
-            hoursEl.textContent = hours.toString().padStart(2, '0');
-            minutesEl.textContent = minutes.toString().padStart(2, '0');
-            secondsEl.textContent = seconds.toString().padStart(2, '0');
+  reopenBtn.addEventListener('click', () => {
+    closedOverlay.style.display = 'none';
+    // reload page if user wants
+    location.reload();
+  });
 
-            // Show "TIME TO GO" banner 1 hour before trip
-            if (days === 0 && hours === 0 && minutes < 60) {
-                timeToGoBanner.style.display = 'block';
-            } else {
-                timeToGoBanner.style.display = 'none';
-            }
+  function formatNumber(n){
+    return String(n).padStart(2,'0');
+  }
 
-            // Update messages based on time remaining
-            if (days === 0 && hours === 0 && minutes < 60) {
-                messageEl.textContent = `🚨 Get ready NOW! Time to leave soon! 🚨`;
-            } else if (days > 7) {
-                messageEl.textContent = `Can't wait to trip with y'all! 🎉`;
-            } else if (days > 0) {
-                messageEl.textContent = `Almost time! Pack your bags! 🎒`;
-            } else if (hours > 0) {
-                messageEl.textContent = `The adventure is today! ✨`;
-            } else {
-                messageEl.textContent = `Just moments away! 🌟`;
-            }
+  function update(){
+    const now = new Date();
+    let diff = (eventTime.getTime() - now.getTime()) / 1000; // seconds
+
+    if (diff <= 0){
+      // Time is up
+      daysEl.textContent = "00";
+      hoursEl.textContent = "00";
+      minutesEl.textContent = "00";
+      secondsEl.textContent = "00";
+      liveBadge.style.display = 'none';
+      messageEl.innerHTML = "<strong>The event time has arrived.</strong>";
+
+      // Try to close the window (works if opened by script). Then fallback to Closed overlay.
+      tryClose();
+      return;
+    }
+
+    // Show Live badge 1 hour before
+    if (diff <= 3600){
+      liveBadge.style.display = 'inline-flex';
+      const minsLeft = Math.ceil(diff / 60);
+      liveText.textContent = `LIVE — ${minsLeft} minute${minsLeft===1?'':'s'} to go`;
+    } else {
+      liveBadge.style.display = 'none';
+    }
+
+    // Compute time parts
+    const days = Math.floor(diff / 86400);
+    diff -= days * 86400;
+    const hours = Math.floor(diff / 3600);
+    diff -= hours * 3600;
+    const mins = Math.floor(diff / 60);
+    const secs = Math.floor(diff % 60);
+
+    daysEl.textContent = formatNumber(days);
+    hoursEl.textContent = formatNumber(hours);
+    minutesEl.textContent = formatNumber(mins);
+    secondsEl.textContent = formatNumber(secs);
+
+    // Friendly message
+    const parts = [];
+    if (days > 0) parts.push(`${days} day${days>1?'s':''}`);
+    if (hours > 0) parts.push(`${hours} hour${hours>1?'s':''}`);
+    if (days === 0 && hours === 0) parts.push(`${mins} minute${mins>1?'s':''}`);
+    messageEl.innerHTML = `Time remaining: <strong>${parts.slice(0,2).join(', ')}</strong>`;
+  }
+
+  function tryClose(){
+    // Attempt to close the window. Many browsers block this unless opened via script.
+    // We try, and after a short timeout show the "Closed" overlay as fallback.
+    try {
+      window.close();
+    } catch (e){
+      // ignore
+    }
+    // After a short delay check if page is still visible; if yes, show closed overlay.
+    setTimeout(() => {
+      // If still not closed, show fallback overlay and optionally redirect.
+      if (!document.hidden){
+        closedOverlay.style.display = 'flex';
+        // Optionally navigate away (comment/uncomment as desired)
+        if (redirectAfterClose){
+          window.location.href = redirectURL;
         }
+      }
+    }, 700);
+  }
 
-        // Update immediately
-        updateCountdown();
-        
-        // Update every second
-        setInterval(updateCountdown, 1000);
-    </script>
+  // Start ticking
+  update();
+  const t = setInterval(() => {
+    update();
+    // If event passed, clear interval
+    if (new Date() >= eventTime){
+      clearInterval(t);
+    }
+  }, 1000);
+
+  // Accessibility: announce 1-hour message when crossing threshold
+  let announcedOneHour = false;
+  const announcer = document.createElement('div');
+  announcer.setAttribute('aria-live','polite');
+  announcer.style.position='absolute';
+  announcer.style.left='-9999px';
+  document.body.appendChild(announcer);
+
+  setInterval(() => {
+    const now = new Date();
+    const diff = (eventTime.getTime() - now.getTime())/1000;
+    if (!announcedOneHour && diff <= 3600 && diff > 3590){
+      announcer.textContent = "One hour remaining.";
+      announcedOneHour = true;
+    }
+  }, 1000);
+</script>
 </body>
 </html>
