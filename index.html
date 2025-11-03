@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Siem Reap Trip Countdown</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Moul&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -12,7 +16,8 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* Updated Font */
+            font-family: 'Playfair Display', serif;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -40,7 +45,8 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, rgba(139, 0, 0, 0.7) 0%, rgba(220, 20, 60, 0.6) 50%, rgba(255, 215, 0, 0.5) 100%);
+            /* NEW: Khmer Flag inspired gradient */
+            background: linear-gradient(135deg, rgba(0, 43, 127, 0.7) 0%, rgba(224, 0, 37, 0.6) 50%, rgba(255, 215, 0, 0.5) 100%);
             z-index: 1;
         }
 
@@ -52,14 +58,15 @@
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            /* NEW: Softer cream background */
+            background: rgba(253, 245, 230, 0.95); /* #FDF5E6 */
             border-radius: 20px;
             padding: 50px 40px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
             max-width: 700px;
             width: 100%;
             text-align: center;
-            border: 3px solid #FFD700;
+            border: 3px solid #FFD700; /* Gold border */
             position: relative;
             z-index: 2;
             backdrop-filter: blur(10px);
@@ -67,10 +74,12 @@
 
         .container::before,
         .container::after {
-            content: '✦';
+            /* NEW: Updated Khmer-style motif */
+            content: '❊';
             position: absolute;
             font-size: 2em;
-            color: #DC143C;
+            /* NEW: Khmer Flag Red */
+            color: #E00025;
         }
 
         .container::before {
@@ -91,11 +100,31 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
+        /* NEW: Style for Khmer title */
+        h1 span[lang="km"] {
+            font-family: 'Moul', cursive;
+            font-size: 1.2em;
+            display: block;
+            margin-bottom: 10px;
+            /* NEW: Khmer Flag Blue */
+            color: #002B7F;
+        }
+
         .destination {
-            color: #DC143C;
+            /* NEW: Khmer Flag Red */
+            color: #E00025;
             font-size: 1.5em;
             margin-bottom: 15px;
             font-weight: 600;
+        }
+        
+        /* NEW: Style for Khmer subtitle */
+        .destination span[lang="km"] {
+            font-family: 'Battambang', cursive;
+            display: block;
+            font-size: 0.9em;
+            margin-top: 5px;
+            color: #333;
         }
 
         .trip-date {
@@ -113,10 +142,11 @@
         }
 
         .time-unit {
-            background: linear-gradient(135deg, #8B0000 0%, #DC143C 100%);
+            /* NEW: Blue-to-Red gradient */
+            background: linear-gradient(135deg, #002B7F 0%, #E00025 100%);
             padding: 25px 15px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
+            box-shadow: 0 5px 15px rgba(0, 43, 127, 0.4);
             transition: transform 0.3s;
             border: 2px solid #FFD700;
         }
@@ -140,6 +170,18 @@
             text-transform: uppercase;
             letter-spacing: 1px;
             font-weight: 500;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* NEW: Style for Khmer countdown labels */
+        .khmer-label {
+            font-family: 'Battambang', cursive;
+            display: block;
+            font-size: 1.1em;
+            margin-top: 4px;
+            opacity: 0.8;
+            text-transform: none;
+            letter-spacing: 0;
         }
 
         .message {
@@ -162,7 +204,9 @@
             color: #8B0000;
             font-size: 0.95em;
             font-weight: 600;
-            border: 2px solid #DC143C;
+            /* NEW: Khmer Flag Red */
+            border: 2px solid #E00025;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
 
         .gallery {
@@ -181,6 +225,16 @@
             text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
             text-align: center;
         }
+        
+        /* NEW: Style for Khmer gallery title */
+        .gallery-title span[lang="km"] {
+            font-family: 'Moul', cursive;
+            display: block;
+            font-size: 0.9em;
+            color: white;
+            text-shadow: 1px 1px 2px #000;
+            margin-top: 5px;
+        }
 
         .gallery-grid {
             display: grid;
@@ -196,7 +250,8 @@
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s, box-shadow 0.3s;
             border: 3px solid #FFD700;
-            background: rgba(255, 255, 255, 0.95);
+            /* NEW: Softer cream background */
+            background: #FDF5E6;
         }
 
         .gallery-item:hover {
@@ -213,7 +268,8 @@
 
         .gallery-caption {
             padding: 15px;
-            background: rgba(255, 255, 255, 0.98);
+            /* NEW: Softer cream background */
+            background: #FDF5E6;
             color: #8B0000;
             font-weight: 600;
             text-align: center;
@@ -250,31 +306,32 @@
 </head>
 <body>
     <div class="background-container">
-        <img src="https://images.pexels.com/photos/2070033/pexels-photo-2070033.jpeg?auto=compress&cs=tinysrgb&w=1920" alt="Angkor Wat Background" id="bg-image">
+        
+        <img src="https://images.unsplash.com/photo-1526481280643-3ff1a0038F4d?w=1920&q=80" alt="Angkor Wat Sunrise Background" id="bg-image">
     </div>
 
     <div class="container">
-        <div class="icon">🏯</div>
-        <h1>Countdown to</h1>
-        <div class="destination">Siem Reap Trip</div>
+        <div class="icon">🛕</div>
+        <h1><span lang="km">រាប់ថយក្រោយទៅ</span>Countdown to</h1>
+        <div class="destination">Siem Reap Trip<span lang="km">ដំណើរទស្សនកិច្ចសៀមរាប</span></div>
         <div class="trip-date">November 6, 2025 at 9:00 PM</div>
 
         <div class="countdown">
             <div class="time-unit">
                 <div class="time-value" id="days">0</div>
-                <div class="time-label">Days</div>
+                <div class="time-label">Days <span class="khmer-label" lang="km">ថ្ងៃ</span></div>
             </div>
             <div class="time-unit">
                 <div class="time-value" id="hours">0</div>
-                <div class="time-label">Hours</div>
+                <div class="time-label">Hours <span class="khmer-label" lang="km">ម៉ោង</span></div>
             </div>
             <div class="time-unit">
                 <div class="time-value" id="minutes">0</div>
-                <div class="time-label">Minutes</div>
+                <div class="time-label">Minutes <span class="khmer-label" lang="km">នាទី</span></div>
             </div>
             <div class="time-unit">
                 <div class="time-value" id="seconds">0</div>
-                <div class="time-label">Seconds</div>
+                <div class="time-label">Seconds <span class="khmer-label" lang="km">វិនាទី</span></div>
             </div>
         </div>
 
@@ -283,31 +340,31 @@
     </div>
 
     <div class="gallery">
-        <h2 class="gallery-title">✨ Discover Siem Reap ✨</h2>
+        <h2 class="gallery-title">✨ Discover Siem Reap <span lang="km">ស្វែងយល់ពីសៀមរាប</span> ✨</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/2070033/pexels-photo-2070033.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Angkor Wat at Sunrise">
-                <div class="gallery-caption">🏯 Angkor Wat - Sunrise Wonder</div>
-            </div>
-            <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/15928697/pexels-photo-15928697.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Bayon Temple">
+                <img src="https://images.unsplash.com/photo-1528181304800-259b08848526?w=800&q=80" alt="Bayon Temple">
                 <div class="gallery-caption">😊 Bayon Temple - Smiling Faces</div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/15890926/pexels-photo-15890926.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ta Prohm Temple">
+                <img src="https://images.unsplash.com/photo-1563640835496-1c5c2e9ec244?w=800&q=80" alt="Ta Prohm Temple">
                 <div class="gallery-caption">🌳 Ta Prohm - Jungle Temple</div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/1586298/pexels-photo-1586298.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Angkor Wat Reflection">
-                <div class="gallery-caption">🌅 Angkor Wat Reflection Pool</div>
+                <img src="https://images.unsplash.com/photo-1543085573-e3c348880a6c?w=800&q=80" alt="Banteay Srei Carvings">
+                <div class="gallery-caption">🌸 Banteay Srei - Intricate Carvings</div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/15928898/pexels-photo-15928898.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ancient Temple Corridors">
-                <div class="gallery-caption">🗿 Ancient Temple Corridors</div>
+                <img src="https://images.unsplash.com/photo-1579413284033-a845b4c194b3?w=800&q=80" alt="Apsara Dancers">
+                <div class="gallery-caption">💃 Traditional Apsara Dancers</div>
             </div>
             <div class="gallery-item">
-                <img src="https://images.pexels.com/photos/15890959/pexels-photo-15890959.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Temple Stone Carvings">
-                <div class="gallery-caption">⭐ Sacred Stone Carvings</div>
+                <img src="https://images.unsplash.com/photo-1574888796839-952b865ab374?w=800&q=80" alt="Angkor Wat Corridor">
+                <div class="gallery-caption">🏛️ Angkor Wat Corridor</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1549921297-5807183e843b?w=800&q=80" alt="Siem Reap Pub Street">
+                <div class="gallery-caption">🍻 Siem Reap - Pub Street Nightlife</div>
             </div>
         </div>
     </div>
@@ -320,12 +377,12 @@
         const messageEl = document.getElementById('message');
         const currentTimeEl = document.getElementById('current-time');
 
-        // Array of Angkor Wat background images from Pexels
+        // NEW: Updated array of background images
         const backgrounds = [
-            'https://images.pexels.com/photos/2070033/pexels-photo-2070033.jpeg?auto=compress&cs=tinysrgb&w=1920',
-            'https://images.pexels.com/photos/1586298/pexels-photo-1586298.jpeg?auto=compress&cs=tinysrgb&w=1920',
-            'https://images.pexels.com/photos/2166559/pexels-photo-2166559.jpeg?auto=compress&cs=tinysrgb&w=1920',
-            'https://images.pexels.com/photos/1612351/pexels-photo-1612351.jpeg?auto=compress&cs=tinysrgb&w=1920'
+            'https://images.unsplash.com/photo-1526481280643-3ff1a0038F4d?w=1920&q=80', // Angkor Wat Sunrise
+            'https://images.unsplash.com/photo-1528181304800-259b08848526?w=1920&q=80', // Bayon Faces
+            'https://images.unsplash.com/photo-1563640835496-1c5c2e9ec244?w=1920&q=80', // Ta Prohm Trees
+            'https://images.unsplash.com/photo-1574888796839-952b865ab374?w=1920&q=80'  // Angkor Wat Corridor
         ];
 
         let currentBgIndex = 0;
@@ -345,7 +402,8 @@
 
             // Update current time display
             const currentDateTime = new Date();
-            currentTimeEl.textContent = `Current Time: ${currentDateTime.toLocaleString('en-US', { 
+            // Using en-GB for a more international date format (DD/MM/YYYY)
+            currentTimeEl.textContent = `Current Local Time: ${currentDateTime.toLocaleString('en-GB', {
                 weekday: 'short', 
                 year: 'numeric', 
                 month: 'short', 
@@ -375,7 +433,7 @@
             secondsEl.textContent = seconds.toString().padStart(2, '0');
 
             if (days > 7) {
-                messageEl.textContent = `Can't wait to trip with y'all! 🎉`;
+                messageEl.textContent = `Can't wait to explore the temples! 🎉`;
             } else if (days > 0) {
                 messageEl.textContent = `Almost time! Pack your bags! 🎒`;
             } else if (hours > 0) {
