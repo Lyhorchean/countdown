@@ -13,34 +13,62 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1570709368767-2e50c1d2b5c6?w=1920') center/cover;
+            opacity: 0.15;
+            z-index: 0;
         }
 
         .container {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             border-radius: 30px;
             padding: 50px 40px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            max-width: 600px;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+            max-width: 700px;
             width: 100%;
             text-align: center;
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+        }
+
+        .angkor-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         h1 {
-            color: #667eea;
-            font-size: 2.5em;
+            color: #d4af37;
+            font-size: 2.8em;
             margin-bottom: 10px;
             font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .destination {
-            color: #764ba2;
-            font-size: 1.5em;
+            color: #c17817;
+            font-size: 1.6em;
             margin-bottom: 15px;
             font-weight: 600;
         }
@@ -52,6 +80,23 @@
             font-weight: 500;
         }
 
+        .time-to-go-banner {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            font-size: 1.8em;
+            font-weight: 700;
+            animation: pulse 1.5s infinite;
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
         .countdown {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -60,15 +105,16 @@
         }
 
         .time-unit {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #d4af37 0%, #c17817 100%);
             padding: 25px 15px;
             border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-            transition: transform 0.3s;
+            box-shadow: 0 8px 25px rgba(212, 175, 55, 0.4);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .time-unit:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
+            box-shadow: 0 12px 35px rgba(212, 175, 55, 0.6);
         }
 
         .time-value {
@@ -125,15 +171,25 @@
             .time-value {
                 font-size: 2.5em;
             }
+
+            .time-to-go-banner {
+                font-size: 1.4em;
+                padding: 15px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="https://images.unsplash.com/photo-1570709368767-2e50c1d2b5c6?w=800" alt="Angkor Wat" class="angkor-image">
         <div class="icon">✈️</div>
         <h1>Countdown to</h1>
         <div class="destination">Siem Reap Trip</div>
         <div class="trip-date">November 6, 2025 at 9:00 PM</div>
+
+        <div id="time-to-go-banner" class="time-to-go-banner" style="display: none;">
+            🚀 IT'S TIME TO GO! 🚀
+        </div>
 
         <div class="countdown">
             <div class="time-unit">
@@ -165,6 +221,7 @@
         const secondsEl = document.getElementById('seconds');
         const messageEl = document.getElementById('message');
         const currentTimeEl = document.getElementById('current-time');
+        const timeToGoBanner = document.getElementById('time-to-go-banner');
 
         // Set trip date to November 6, 2025 at 9:00 PM
         const tripDate = new Date('2025-11-06T21:00:00').getTime();
@@ -185,12 +242,19 @@
                 second: '2-digit'
             })}`;
 
+            // Check if countdown has ended
             if (distance < 0) {
                 daysEl.textContent = '0';
                 hoursEl.textContent = '0';
                 minutesEl.textContent = '0';
                 secondsEl.textContent = '0';
                 messageEl.textContent = '🎊 Your Siem Reap adventure has begun! Have an amazing trip! 🎊';
+                timeToGoBanner.style.display = 'none';
+                
+                // Close the page after 5 seconds
+                setTimeout(() => {
+                    window.close();
+                }, 5000);
                 return;
             }
 
@@ -204,7 +268,17 @@
             minutesEl.textContent = minutes.toString().padStart(2, '0');
             secondsEl.textContent = seconds.toString().padStart(2, '0');
 
-            if (days > 7) {
+            // Show "TIME TO GO" banner 1 hour before trip
+            if (days === 0 && hours === 0 && minutes < 60) {
+                timeToGoBanner.style.display = 'block';
+            } else {
+                timeToGoBanner.style.display = 'none';
+            }
+
+            // Update messages based on time remaining
+            if (days === 0 && hours === 0 && minutes < 60) {
+                messageEl.textContent = `🚨 Get ready NOW! Time to leave soon! 🚨`;
+            } else if (days > 7) {
                 messageEl.textContent = `Can't wait to trip with y'all! 🎉`;
             } else if (days > 0) {
                 messageEl.textContent = `Almost time! Pack your bags! 🎒`;
